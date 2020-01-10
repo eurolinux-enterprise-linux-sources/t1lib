@@ -1,6 +1,6 @@
 Name:           t1lib
 Version:        5.1.2
-Release:        6%{?dist}
+Release:        6%{?dist}.1
 
 Summary:        PostScript Type 1 font rasterizer
 
@@ -17,6 +17,10 @@ Patch0:         %{name}-%{version}-segf.patch
 Patch1:         %{name}-%{version}-lib-cleanup.patch
 Patch2:         %{name}-%{version}-no-config.patch
 Patch3:         %{name}-%{version}-no-docs.patch
+# Fixes CVE-2010-2642, CVE-2011-0433
+Patch4:         %{name}-%{version}-afm-fix.patch
+# Fixes CVE-2011-0764, CVE-2011-1552, CVE-2011-1553, CVE-2011-1554
+Patch5:         %{name}-%{version}-type1-inv-rw-fix.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:  libXaw-devel
 
@@ -31,11 +35,11 @@ X11.
 AFM-files can be generated from Type 1 font files and font subsetting
 is possible.
 
-%package	apps
+%package        apps
 Summary:  t1lib demo applications
 Group:    Applications/Text
 
-%description	apps
+%description    apps
 Sample applications using t1lib
 
 %package        devel
@@ -63,6 +67,8 @@ This package contains static libraries for %{name}.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1 -b .afm-fix
+%patch5 -p1 -b .type1-inv-rw-fix
 
 iconv -f latin1 -t utf8 < Changes > Changes.utf8
 touch -r Changes Changes.utf8
@@ -148,6 +154,10 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Jan 10 2012 Jaroslav Škarvada <jskarvad@redhat.com> - 5.1.2-6.1
+- Fixed CVE-2010-2642, CVE-2011-0433, CVE-2011-0764, CVE-2011-1552, CVE-2011-1553, CVE-2011-1554
+  Resolves: rhbz#772900
+
 * Mon Jan 18 2010 Jaroslav Škarvada <jskarvad@redhat.com> - 5.1.2-6
 - Resolves: #556398
 - Directly included relevant patches, scripts and man pages from Debian
