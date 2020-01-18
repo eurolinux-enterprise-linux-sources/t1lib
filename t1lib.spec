@@ -1,6 +1,6 @@
 Name:           t1lib
 Version:        5.1.2
-Release:        12%{?dist}
+Release:        14%{?dist}
 
 Summary:        PostScript Type 1 font rasterizer
 
@@ -150,6 +150,12 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Fri Jan 24 2014 Daniel Mach <dmach@redhat.com> - 5.1.2-14
+- Mass rebuild 2014-01-24
+
+* Fri Dec 27 2013 Daniel Mach <dmach@redhat.com> - 5.1.2-13
+- Mass rebuild 2013-12-27
+
 * Tue Mar 26 2013 Jaroslav Škarvada <jskarvad@redhat.com> - 5.1.2-12
 - Added support for aarch64 (aarch64 patch)
   Resolves: rhbz#926603
